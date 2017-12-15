@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}{{title}}{% endblock title %}
+{% block content %}
+	<h3>{{title}}</h3>
+
+	<div class="blocks_L">
+		<form action="search" method="POST">
+	      {% csrf_token %}
+	      {{form}}
+	      <input type="submit" name="submit" value="{{title}}" class="waves-light btn" />
+	  	</form>	
+	</div>
+	<div class="blocks_R">
+		<table class="highlight">
+			<tr class="teal lighten-2 white-text ">
+				<th>Username</th>
+				<th>Store</th>
+				<th>Full Address</th>
+				<th>Data Time</th>
+				<!-- <th>Accion</th> -->
+			</tr>
+			{% for content in contents %}
+			<tr>	
+				<td>{{content.username}}</td>
+				<td>{{content.name_store}}</td>
+				<td>{{content.address_store}}, {{content.city_store}}, {{content.state_store}}, {{content.postal_store}}, {{content.country_store}}</td>
+				<td>{{content.timestamp}}</td>
+				<!-- <td><a href="/assistant/search/{{content.id}}">Details</a><td> -->
+			</tr>
+			{% endfor %}
+		</table>
+
+	</div>
+    
+{% endblock content %}

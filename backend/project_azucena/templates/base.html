@@ -1,0 +1,45 @@
+{% load static %}
+<html>
+	<head>
+		<title>{% block title %}{% endblock title %}</title>  
+		<link rel="stylesheet"  href="{% static "css/materialize.min.css" %}">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		{% block css %}{% endblock css %}			
+		<style>
+			select{ display:block !important;}
+		
+			#pages{ margin:0 auto; width:90%; }
+			.blocks_L{ width:calc(30% - 30px); float:left; padding:10px 15px;}
+			.blocks_R{ width:calc(70%); float:left; padding:10px 0; }
+		</style>		
+	</head>
+	<body>
+		<div class="navbar-fixed">
+			<nav>
+				<div class="nav-wrapper blue-grey darken-4">
+				<a href="/" class="brand-logo"><img src='/static/img/logooficial.png' width='100px' style='margin:6px' /></a>
+					<ul id="nav-mobile" class="right hide-on-med-and-down">
+						<li><a href='../'>Home</a></li>
+					{% if not request.user.is_authenticated %}
+						<li><a href='/register/'>Register</a></li>
+						<li><a href='/login/'>Login</a></li>
+					{% endif %}
+					{% if request.user.is_authenticated %}
+						<li><a href='/stores/'>Stores</a></li>
+						<li><a href='/assistant/'>Assistants</a></li>
+						<li><a href='/cutflower/'>Cut Flowers</a></li>
+						<li><a href='/logout/'>Logout</a></li>
+					{% endif %}
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<div id="pages">
+			{% block content %}
+			{% endblock content %}	
+		</div>
+	</body>
+	<script src="{% static 'js/jquery-3.2.1.min.js' %}"> </script>
+	<script src="{% static 'js/materialize.min.js' %}"> </script>
+	{% block js %}{% endblock js %}
+</html>
